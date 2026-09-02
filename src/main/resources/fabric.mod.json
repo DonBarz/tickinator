@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "tickinator",
+  "version": "${version}",
+  "name": "Tickinator",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/tickinator/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+    ],
+    "main": [
+      "de.donbarz.tickinator.Tickinator"
+    ]
+  },
+  "mixins": [
+    "tickinator.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
