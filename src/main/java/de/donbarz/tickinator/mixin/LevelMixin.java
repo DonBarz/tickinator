@@ -20,9 +20,9 @@ public abstract class LevelMixin {
     // Skips ticks for blocks specified in the tags
     @Redirect(method = "tickBlockEntities()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/TickingBlockEntity;tick()V"))
     private void tickSelectedBlockEntities(TickingBlockEntity blockEntity) {
-        if (getBlockState(blockEntity.getPos()).is(Tickinator.EXCLUDE) && !getBlockState(blockEntity.getPos()).is(Tickinator.INCLUDE)) {
+        if (getBlockState(blockEntity.getPos()).is(Tickinator.EXCLUDE) || !getBlockState(blockEntity.getPos()).is(Tickinator.INCLUDE)) {
             blockEntity.tick();
         }
-        else Tickinator.LOGGER.info("Suppressed tick of \"" + blockEntity.getType() + "\" at Position " + blockEntity.getPos());
+        // else Tickinator.LOGGER.info("Suppressed tick of \"" + blockEntity.getType() + "\" at Position " + blockEntity.getPos());
     }
 }
