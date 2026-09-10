@@ -28,6 +28,6 @@ public class LevelMixinMixin{
         if (blockState.is(Tickinator.EXCLUDE) || !blockState.is(Tickinator.INCLUDE)) {
             original.call(blockEntity);
         }
-        else Tickinator.LOGGER.info("Suppressed tick of \"" + blockState.getBlock().toString() + "\" at Position " + blockEntity.getPos());
+        // else Tickinator.LOGGER.info("Suppressed tick of \"" + blockState.getBlock().toString() + "\" at Position " + blockEntity.getPos());
     }
 }
