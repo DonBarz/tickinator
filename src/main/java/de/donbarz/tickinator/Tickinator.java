@@ -1,7 +1,9 @@
 package de.donbarz.tickinator;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -18,5 +20,14 @@ public class Tickinator implements ModInitializer {
     @Override
     public void onInitialize() {
         BLOCK_CONFIG.reload();
+
+        // adding command to reload the config at runtime
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            dispatcher.register(Commands.literal("tickinator")
+                    .then(Commands.literal("reload").executes(context -> {
+                        BLOCK_CONFIG.reload();
+                        return 0;
+                    })));
+        });
     }
 }

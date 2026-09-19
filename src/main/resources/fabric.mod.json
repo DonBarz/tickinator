@@ -3,10 +3,11 @@
   "id": "tickinator",
   "version": "${version}",
   "name": "Tickinator",
-  "description": "",
+  "description": "Thou shall not tick!",
   "authors": [],
   "contact": {},
   "license": "MIT",
+  "icon": "assets/tickinator/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -19,7 +20,7 @@
     "tickinator.mixins.json"
   ],
   "depends": {
-    "observable": "*",
+    "fern_config": "*",
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
     "minecraft": "${minecraft_version}"

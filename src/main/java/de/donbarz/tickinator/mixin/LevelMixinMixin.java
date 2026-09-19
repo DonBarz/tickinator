@@ -29,7 +29,7 @@ public class LevelMixinMixin{
         ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(blockState.getBlock());
 
         // elite level ferning
-        if ((Tickinator.BLOCK_CONFIG.exclude_mask.get().isOkay(blockId)) || !(Tickinator.BLOCK_CONFIG.include_mask.get().isOkay(blockId))) {
+        if (!(Tickinator.BLOCK_CONFIG.exclude_mask.get().isOkay(blockId)) || !(Tickinator.BLOCK_CONFIG.include_mask.get().isOkay(blockId))) {
             original.call(blockEntity);
         }
         else {

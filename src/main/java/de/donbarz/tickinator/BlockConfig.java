@@ -50,7 +50,7 @@ public class BlockConfig extends CConfig {
                             "mask_type",
                             "",
                             MaskType.class,
-                            MaskType.WHITELIST
+                            MaskType.BLACKLIST
                     ),
                     "*:*"
             )
