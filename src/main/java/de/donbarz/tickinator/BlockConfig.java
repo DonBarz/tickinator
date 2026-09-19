@@ -24,7 +24,7 @@ public class BlockConfig extends CConfig {
         return CExporter.Format.JSON5;
     }
 
-    private static final CCategory COMPLEX_THINGS = CCategory.of("complex_category", "Unbasic values", "read carefully");
+    private static final CCategory COMPLEX_THINGS = CCategory.of("tickinator block entity suppressing", "Suppressed blocks entities WILL NOT function but also not impede performance.", "Very experimental, handle with care");
 
     //public final CEnum<TestEnum> test_enum = register(COMPLEX_THINGS, new CEnum<>("thats_enum", "Only values listed above this comment are acceptable", TestEnum.class, TestEnum.TASTY_ENUM));
 
@@ -38,7 +38,7 @@ public class BlockConfig extends CConfig {
                             MaskType.class,
                             MaskType.WHITELIST
                     ),
-                    "minecraft:furnace"
+                    "*:*"
             )
     );
 

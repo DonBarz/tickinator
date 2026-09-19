@@ -13,13 +13,10 @@ public class Tickinator implements ModInitializer {
     public static final String MOD_ID = "tickinator";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public static final TagKey<Block> INCLUDE = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("tickinator", "include"));
-    public static final TagKey<Block> EXCLUDE = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("tickinator", "exclude"));
-
     public static BlockConfig BLOCK_CONFIG = new BlockConfig();
 
     @Override
     public void onInitialize() {
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) BLOCK_CONFIG.reload();
+        BLOCK_CONFIG.reload();
     }
 }

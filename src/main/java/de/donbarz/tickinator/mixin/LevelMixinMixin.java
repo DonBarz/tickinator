@@ -4,6 +4,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import de.donbarz.tickinator.Tickinator;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
@@ -24,7 +26,10 @@ public class LevelMixinMixin{
     )    private void tickSelectedBlockEntities(TickingBlockEntity blockEntity, Operation<Void> original) {
         Level self = (Level)(Object)this;
         BlockState blockState = self.getBlockState(blockEntity.getPos());
-        if (blockState.is(Tickinator.EXCLUDE) || !blockState.is(Tickinator.INCLUDE)) {
+        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(blockState.getBlock());
+
+        // elite level ferning
+        if ((Tickinator.BLOCK_CONFIG.exclude_mask.get().isOkay(blockId)) || !(Tickinator.BLOCK_CONFIG.include_mask.get().isOkay(blockId))) {
             original.call(blockEntity);
         }
         else {
