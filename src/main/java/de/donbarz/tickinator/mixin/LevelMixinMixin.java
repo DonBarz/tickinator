@@ -3,14 +3,11 @@ package de.donbarz.tickinator.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import de.donbarz.tickinator.Tickinator;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import observable.Observable;
-import observable.Props;
-import observable.mixin.LevelMixin; // very important line for some reason
-import observable.server.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -33,19 +30,22 @@ public class LevelMixinMixin{
         else {
             // Tickinator.LOGGER.info("Suppressed tick of \"" + blockState.getBlock().toString() + "\" at Position " + blockEntity.getPos());
 
-            // This is just the Observable stuff copied over to maintain simplicity
-            if (!Props.notProcessing) {
-                if (Props.blockEntityDepth < 0) {
-                    Props.blockEntityDepth = Thread.currentThread().getStackTrace().length - 1;
-                }
-
-                if (self instanceof ServerLevel) {
-                    Profiler.TimingData data = Observable.INSTANCE.getPROFILER().processBlockEntity(blockEntity, self);
-                    Props.currentTarget.set(data);
-                    // if this is set to -1, the overlay for suppressed blocks won't render (might be useful >:))
-                    data.setTime(0);
-                    Props.currentTarget.set(null);
-                    data.setTicks(data.getTicks() + 1);
+            // optional dependency for observable
+            if (FabricLoader.getInstance().isModLoaded("observable")) {
+                // This is just the Observable stuff copied over
+                if (!observable.Props.notProcessing) {
+                    if (observable.Props.blockEntityDepth < 0) {
+                        observable.Props.blockEntityDepth = Thread.currentThread().getStackTrace().length - 1;
+                    }
+                    if (self instanceof ServerLevel) {
+                        observable.server.Profiler.TimingData data = observable.Observable.INSTANCE.getPROFILER().processBlockEntity(blockEntity, self);
+                        observable.Props.currentTarget.set(data);
+                        // this is the displayed observable impact
+                        // if this is set to -1, the overlay for suppressed blocks won't render (might be useful >:))
+                        data.setTime(0); // I'm going to be setting it to 0, it doesn't make a difference
+                        observable.Props.currentTarget.set(null);
+                        data.setTicks(data.getTicks() + 1);
+                    }
                 }
             }
         }
