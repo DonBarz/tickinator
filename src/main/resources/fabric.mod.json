@@ -7,7 +7,6 @@
   "authors": [],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/tickinator/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -20,9 +19,9 @@
     "tickinator.mixins.json"
   ],
   "depends": {
+    "observable": "*",
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}",
-    "observable": "*"
+    "minecraft": "${minecraft_version}"
   }
 }

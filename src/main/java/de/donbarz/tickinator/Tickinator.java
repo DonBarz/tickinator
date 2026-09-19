@@ -1,6 +1,7 @@
 package de.donbarz.tickinator;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -15,8 +16,10 @@ public class Tickinator implements ModInitializer {
     public static final TagKey<Block> INCLUDE = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("tickinator", "include"));
     public static final TagKey<Block> EXCLUDE = TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("tickinator", "exclude"));
 
+    public static BlockConfig BLOCK_CONFIG = new BlockConfig();
+
     @Override
     public void onInitialize() {
-
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) BLOCK_CONFIG.reload();
     }
 }
