@@ -2,10 +2,8 @@ package de.donbarz.tickinator;
 
 import dev.lemonnik.fern_config.CConfig;
 import dev.lemonnik.fern_config.CExporter;
-import dev.lemonnik.fern_config.impl.TestEnum;
 import dev.lemonnik.fern_config.types.*;
 import dev.lemonnik.fern_config.utils.CCategory;
-import dev.lemonnik.fern_config.utils.FloatArray;
 import dev.lemonnik.fern_config.utils.MaskType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.jetbrains.annotations.NotNull;
